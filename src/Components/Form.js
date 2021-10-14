@@ -52,7 +52,8 @@ export default function Form() {
 
   return (
     <div>
-      <h1>Add your music item</h1>
+      <h1>World's greatest playlist</h1>
+      <h2>Add a music item</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
