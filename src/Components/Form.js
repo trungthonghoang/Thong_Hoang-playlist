@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import data from "./example-data.json";
 import { nanoid } from "nanoid";
+import MusicList from "./MusicList";
 
 export default function Form() {
   const [musicItems, setMusicItems] = useState(data);
@@ -39,8 +40,19 @@ export default function Form() {
     setMusicItems(newMusicItems);
   }
 
+  function handleDeleteClick(itemId) {
+    const newMusicItems = [...musicItems];
+
+    const index = musicItems.findIndex((item) => item.id === itemId);
+
+    newMusicItems.splice(index, 1);
+
+    setMusicItems(newMusicItems);
+  }
+
   return (
     <div>
+      <h1>Add your music item</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -82,16 +94,12 @@ export default function Form() {
             <th>Artist</th>
             <th>Genre</th>
             <th>Rating</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {musicItems.map((item) => (
-            <tr>
-              <td>{item.title}</td>
-              <td>{item.artist}</td>
-              <td>{item.genre}</td>
-              <td>{item.rating}</td>
-            </tr>
+            <MusicList item={item} handleDeleteClick={handleDeleteClick} />
           ))}
         </tbody>
       </table>
